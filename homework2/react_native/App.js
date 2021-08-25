@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
+import React from "react";
+import type { Node } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -19,7 +19,7 @@ import {
   TextInput,
   Button,
   Alert,
-} from 'react-native';
+} from "react-native";
 
 import {
   Colors,
@@ -27,13 +27,13 @@ import {
   Header,
   LearnMoreLinks,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {useState} from 'react';
+} from "react-native/Libraries/NewAppScreen";
+import { useState } from "react";
 
-import {LoginController} from './view/login';
+import { LoginController } from "./view/login";
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+const Section = ({ children, title }): Node => {
+  const isDarkMode = useColorScheme() === "dark";
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -42,7 +42,8 @@ const Section = ({children, title}): Node => {
           {
             color: isDarkMode ? Colors.white : Colors.black,
           },
-        ]}>
+        ]}
+      >
         {title}
       </Text>
       <Text
@@ -51,7 +52,8 @@ const Section = ({children, title}): Node => {
           {
             color: isDarkMode ? Colors.light : Colors.dark,
           },
-        ]}>
+        ]}
+      >
         {children}
       </Text>
     </View>
@@ -59,12 +61,13 @@ const Section = ({children, title}): Node => {
 };
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const [inputText, setInputText] = useState(
-    'Are you homeless? Come and have a meal!',
-  );
+  const isDarkMode = useColorScheme() === "dark";
+  const [inputText, setInputText] = useState();
 
   const handleEnterText = () => {
+    setInputText(inputText);
+  };
+  const onSubmitTextInput = () => {
     setInputText(inputText);
   };
 
@@ -74,44 +77,26 @@ const App: () => Node = () => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        {/* <Header /> */}
-        {/* <LoginController /> */}
+        style={backgroundStyle}
+      >
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          {/* <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks /> */}
+          }}
+        >
           <Text style={styles.header}>Welcome!!</Text>
           <TextInput
             style={styles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Email"
-            placeholderTextColor="#9a73ef"
-            autoCapitalize="none"
+            placeholder="Your Name"
             defaultValue={inputText}
-            onChangeText={inputText => setInputText(inputText)}
+            onChangeText={(inputText) => setInputText(inputText)}
           />
           <Button
-            style={styles.button}
-            title="Send"
-            onPress={() => Alert.alert(inputText)}
+            title="Submit"
+            onPress={() => Alert.alert('Hi! ' + inputText)}
           />
         </View>
       </ScrollView>
@@ -123,38 +108,38 @@ const styles = StyleSheet.create({
   header: {
     marginLeft: 140,
     marginTop: 20,
-    fontSize: 18,
+    fontSize: 22,
   },
   input: {
     padding: 10,
     margin: 15,
     borderRadius: 30,
     height: 40,
-    borderColor: 'black',
-    fontSize: 15,
+    borderColor: "black",
+    fontSize: 17,
     borderWidth: 1,
   },
   button: {
-    backgroundColor: 'blue',
+    padding: 10,
   },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginHorizontal: 16,
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 
